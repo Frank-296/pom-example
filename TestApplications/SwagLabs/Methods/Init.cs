@@ -30,6 +30,7 @@ public class Init
             // Si la página cargó correctamente entonces tomamos la captura y guardamos el log en el reporte marcando el paso como Pass.
             if (loadPage)
             {
+                Assert.That(loadPage, Is.EqualTo(true));
                 Thread.Sleep(2000);
 
                 screenshot = driver.TakeScreenshot();
@@ -39,8 +40,6 @@ public class Init
                 var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
 
                 test.Log(status, step, evidence);
-
-                Assert.That(loadPage, Is.EqualTo(true));
             }
         }
         // Si la página no cargó correctamente de igual forma tomamos la captura y guardamos el log en el reporte marcando el paso como Fail.
@@ -89,6 +88,7 @@ public class Init
             // Si el Label se visualiza correctamente entonces tomamos la captura y guardamos el log en el reporte marcando el paso como Pass.
             if (homeLabel.Displayed)
             {
+                Assert.That(homeLabel.Displayed, Is.EqualTo(true));
                 Thread.Sleep(2000);
 
                 screenshot = driver.TakeScreenshot();
@@ -98,8 +98,6 @@ public class Init
                 var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
 
                 test.Log(status, step, evidence);
-
-                Assert.That(homeLabel.Displayed, Is.EqualTo(true));
             }
         }
         // Si el Label no se visualiza correctamente de igual forma tomamos la captura y guardamos el log en el reporte marcando el paso como Fail.

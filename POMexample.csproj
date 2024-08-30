@@ -28,8 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TestApplications\SwagLabs\Results\" />
-    <Folder Include="TestApplications\SwagLabs\Results\ProductsTestCases\Search_Product_Test_Case_001\" />
+    <Folder Include="TestApplications\SwagLabs\Results\ProductsTestCases\" />
     <Folder Include="TestApplications\SwagLabs\Sections\" />
   </ItemGroup>
 

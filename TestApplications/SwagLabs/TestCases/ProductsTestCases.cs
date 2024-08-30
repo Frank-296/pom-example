@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using POMexample.TestApplications.SwagLabs.BusinessProcesses;
+using POMexample.TestApplications.SwagLabs.Utilities;
 using POMexample.TestApplications.SwagLabs.Methods;
 
 namespace POMexample.TestApplications.SwagLabs.TestCases;
@@ -40,17 +41,16 @@ public class ProductsTestCases
         TestSteps.Step = 0;
 
         // Inicializamos el driver, para este script usaremos "Selenium" con el navegador Chrome y como segundo parámetro false para que se muestre el navegador.
-        var driver = Settings.InitializeIWebDriver(BrowserDriver.Chrome, false);
+        var driver = Settings.InitializeIWebDriver(BrowserDriver.Chrome, true);
 
         // A partir de aquí estas líneas son solo llamadas a los métodos que están en las otras carpetas, aplicando satisfactoriamente el patrón de diseño POM 😊
-        Init.LaunchApplicationStep(driver, report, test, "https://www.saucedemo.com/");
+        Init.LaunchApplicationStep(driver, report, test, Environments.TestEnvironments[TestEnvironment.UAT]);
         Init.LoginStep(driver, dataPool, report, test);
         Products.SelectProductStep(driver, dataPool, report, test);
 
         // Finalmente salvamos el reporte y cerramos el driver.
         report.Flush();
         driver.Quit();
-
     }
 
     [Test, Order(2)]
@@ -66,13 +66,14 @@ public class ProductsTestCases
         TestSteps.Step = 0;
 
         // Inicializamos el driver, para este script usaremos "Selenium" con el navegador Edge y como segundo parámetro true para que no se muestre el navegador (headless).
-        var driver = Settings.InitializeIWebDriver(BrowserDriver.Edge, true);
+        var driver = Settings.InitializeIWebDriver(BrowserDriver.Edge, false);
 
-        Init.LaunchApplicationStep(driver, report, test, "https://www.saucedemo.com/");
+        Init.LaunchApplicationStep(driver, report, test, Environments.TestEnvironments[TestEnvironment.UAT]);
         Init.LoginStep(driver, dataPool, report, test);
         Products.SelectProductStep(driver, dataPool, report, test);
         Products.AddProductToCartStep(driver, report, test);
         Products.CheckCartStep(driver, report, test);
+        Products.CheckoutStep(driver, dataPool, report, test);
 
         report.Flush();
         driver.Quit();

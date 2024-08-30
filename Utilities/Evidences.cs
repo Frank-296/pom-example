@@ -104,3 +104,16 @@ public class Evidences
         return file;
     }
 }
+
+// Este enum servirá para gestionar los ambientes de prueba.
+public enum TestEnvironment : Int32
+{
+    [Display(Name = "DEV")]
+    DEV = 1,
+    [Display(Name = "SIT")]
+    SIT = 2,
+    [Display(Name = "UAT")]
+    UAT = 3,
+    [Display(Name = "PROD")]
+    PROD = 4
+}
