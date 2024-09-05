@@ -26,21 +26,18 @@ public class Init
             // Validamos que la aplicación cargó satisfactoriamente.
             var loadPage = new WebDriverWait(driver, TimeSpan.FromSeconds(10))
                 .Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
-            
+
             // Si la página cargó correctamente entonces tomamos la captura y guardamos el log en el reporte marcando el paso como Pass.
-            if (loadPage)
-            {
-                Assert.That(loadPage, Is.EqualTo(true));
-                Thread.Sleep(2000);
+            Assert.That(loadPage, Is.EqualTo(true));
+            Thread.Sleep(2000);
 
-                screenshot = driver.TakeScreenshot();
+            screenshot = driver.TakeScreenshot();
 
-                var status = Status.Pass;
-                var step = TestSteps.Step + " La aplicación se inició correctamente.";
-                var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
+            var status = Status.Pass;
+            var step = TestSteps.Step + " La aplicación se inició correctamente.";
+            var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
 
-                test.Log(status, step, evidence);
-            }
+            test.Log(status, step, evidence);
         }
         // Si la página no cargó correctamente de igual forma tomamos la captura y guardamos el log en el reporte marcando el paso como Fail.
         catch (Exception exception)
@@ -86,19 +83,16 @@ public class Init
                 .Until(d => d.FindElement(By.XPath(ProductsLocators.Locators["homeLabel_Xpath"])));
 
             // Si el Label se visualiza correctamente entonces tomamos la captura y guardamos el log en el reporte marcando el paso como Pass.
-            if (homeLabel.Displayed)
-            {
-                Assert.That(homeLabel.Displayed, Is.EqualTo(true));
-                Thread.Sleep(2000);
+            Assert.That(homeLabel.Displayed, Is.EqualTo(true));
+            Thread.Sleep(2000);
 
-                screenshot = driver.TakeScreenshot();
+            screenshot = driver.TakeScreenshot();
 
-                var status = Status.Pass;
-                var step = TestSteps.Step + " El inicio de sesión fue exitoso.";
-                var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
+            var status = Status.Pass;
+            var step = TestSteps.Step + " El inicio de sesión fue exitoso.";
+            var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
 
-                test.Log(status, step, evidence);
-            }
+            test.Log(status, step, evidence);
         }
         // Si el Label no se visualiza correctamente de igual forma tomamos la captura y guardamos el log en el reporte marcando el paso como Fail.
         catch (Exception exception)

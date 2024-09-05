@@ -1,6 +1,5 @@
 ﻿#nullable disable
 using POMexample.TestApplications.SwagLabs.Locators;
-using POMexample.Utilities;
 
 namespace POMexample.TestApplications.SwagLabs.BusinessProcesses;
 
@@ -113,19 +112,16 @@ public class Products
                 .Until(d => d.FindElement(By.XPath(CartLocators.Locators["cartLabel_Xpath"])));
 
             // Si el Label se visualiza correctamente entonces tomamos la captura y guardamos el log en el reporte marcando el paso como Pass.
-            if (cartLabel.Displayed)
-            {
-                Assert.That(cartLabel.Displayed, Is.EqualTo(true));
-                Thread.Sleep(2000);
+            Assert.That(cartLabel.Displayed, Is.EqualTo(true));
+            Thread.Sleep(2000);
 
-                screenshot = driver.TakeScreenshot();
+            screenshot = driver.TakeScreenshot();
 
-                var status = Status.Pass;
-                var step = TestSteps.Step + " Se visualizó el contenido del carrito exitosamente.";
-                var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
+            var status = Status.Pass;
+            var step = TestSteps.Step + " Se visualizó el contenido del carrito exitosamente.";
+            var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
 
-                test.Log(status, step, evidence);
-            }
+            test.Log(status, step, evidence);
         }
         // Si el Label no se visualiza correctamente de igual forma tomamos la captura y guardamos el log en el reporte marcando el paso como Fail.
         catch (Exception exception)
@@ -162,32 +158,29 @@ public class Products
                 .Until(d => d.FindElement(By.XPath(CheckoutLocators.Locators["checkoutLabel_Xpath"])));
 
             // Si el Label se visualiza correctamente entonces llenamos el formulario tomamos la captura y guardamos el log en el reporte marcando el paso como Pass.
-            if (checkoutLabel.Displayed)
-            {
-                Assert.That(checkoutLabel.Displayed, Is.EqualTo(true));
+            Assert.That(checkoutLabel.Displayed, Is.EqualTo(true));
 
-                driver.FindElement(By.Id(CheckoutLocators.Locators["firstNameInput_Id"]))
-                    .SendKeys(dataPool.FirstOrDefault(x => x.Parameter == "FirstName").Value);
+            driver.FindElement(By.Id(CheckoutLocators.Locators["firstNameInput_Id"]))
+                .SendKeys(dataPool.FirstOrDefault(x => x.Parameter == "FirstName").Value);
 
-                driver.FindElement(By.Id(CheckoutLocators.Locators["lastNameInput_Id"]))
-                    .SendKeys(dataPool.FirstOrDefault(x => x.Parameter == "LastName").Value);
+            driver.FindElement(By.Id(CheckoutLocators.Locators["lastNameInput_Id"]))
+                .SendKeys(dataPool.FirstOrDefault(x => x.Parameter == "LastName").Value);
 
-                driver.FindElement(By.Id(CheckoutLocators.Locators["postalCodeInput_Id"]))
-                    .SendKeys(dataPool.FirstOrDefault(x => x.Parameter == "PostalCode").Value);
+            driver.FindElement(By.Id(CheckoutLocators.Locators["postalCodeInput_Id"]))
+                .SendKeys(dataPool.FirstOrDefault(x => x.Parameter == "PostalCode").Value);
 
-                Thread.Sleep(2000);
+            Thread.Sleep(2000);
 
-                screenshot = driver.TakeScreenshot();
+            screenshot = driver.TakeScreenshot();
 
-                var status = Status.Pass;
-                var step = TestSteps.Step + " Se llenó el formulario del checkout exitosamente.";
-                var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
+            var status = Status.Pass;
+            var step = TestSteps.Step + " Se llenó el formulario del checkout exitosamente.";
+            var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
 
-                test.Log(status, step, evidence);
+            test.Log(status, step, evidence);
 
-                // Ejecutamos el paso para revisar la orden de compra.
-                ReviewPurchaseOrderStep(driver, dataPool, report, test);
-            }
+            // Ejecutamos el paso para revisar la orden de compra.
+            ReviewPurchaseOrderStep(driver, dataPool, report, test);
         }
         // Si el Label no se visualiza correctamente de igual forma tomamos la captura y guardamos el log en el reporte marcando el paso como Fail.
         catch (Exception exception)
@@ -277,18 +270,16 @@ public class Products
             var purchaseLabel = new WebDriverWait(driver, TimeSpan.FromSeconds(10))
                 .Until(d => d.FindElement(By.XPath(CheckoutLocators.Locators["purchaseLabel_Xpath"])));
 
-            if (purchaseLabel.Displayed)
-            {
-                Thread.Sleep(2000);
+            Assert.That(purchaseLabel.Displayed, Is.EqualTo(true));
+            Thread.Sleep(2000);
 
-                screenshot = driver.TakeScreenshot();
+            screenshot = driver.TakeScreenshot();
 
-                var status = Status.Pass;
-                var step = TestSteps.Step + " La compra se finalizó exitosamente.";
-                var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
+            var status = Status.Pass;
+            var step = TestSteps.Step + " La compra se finalizó exitosamente.";
+            var evidence = MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString).Build();
 
-                test.Log(status, step, evidence);
-            }
+            test.Log(status, step, evidence);
         }
         catch (Exception exception)
         {

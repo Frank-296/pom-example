@@ -47,6 +47,7 @@ public class ProductsTestCases
         Init.LaunchApplicationStep(driver, report, test, Environments.TestEnvironments[TestEnvironment.UAT]);
         Init.LoginStep(driver, dataPool, report, test);
         Products.SelectProductStep(driver, dataPool, report, test);
+        ShutOff.LogoutStep(driver, report, test);
 
         // Finalmente salvamos el reporte y cerramos el driver.
         report.Flush();
@@ -74,6 +75,7 @@ public class ProductsTestCases
         Products.AddProductToCartStep(driver, report, test);
         Products.CheckCartStep(driver, report, test);
         Products.CheckoutStep(driver, dataPool, report, test);
+        ShutOff.LogoutStep(driver, report, test);
 
         report.Flush();
         driver.Quit();

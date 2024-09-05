@@ -15,12 +15,13 @@
     <PackageReference Include="ExtentReports" Version="5.0.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.0" />
     <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.46.0" />
-    <PackageReference Include="NUnit" Version="4.2.1" />
+    <PackageReference Include="NUnit" Version="4.2.2" />
     <PackageReference Include="NUnit.Analyzers" Version="4.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+    <PackageReference Include="PuppeteerSharp" Version="19.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="TestApplications\OrangeHRM\Results\ManageTestCases\" />
     <Folder Include="TestApplications\SwagLabs\Results\ProductsTestCases\" />
     <Folder Include="TestApplications\SwagLabs\Sections\" />
   </ItemGroup>
